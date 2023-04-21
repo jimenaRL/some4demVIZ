@@ -2,15 +2,18 @@
 
 users_limit=1
 
-experiment="france_ideN_8_sources_min_followers_25_sources_min_outdegree_3"
-embeddings="/viz/embeddings/$experiment"
-logdir="/viz/logs/$experiment"
+experiment="france_ideN_2_sources_min_followers_25_sources_min_outdegree_3"
+embeddings="embeddings/$experiment"
+logdir="logs/$experiment"
 
 python viz_ideological.py --embeddings=$embeddings --logdir=$logdir --users_limit=$users_limit
 tensorboard --bind_all --port 6006 --logdir $logdir &
 
 
-experiment="ches2019_antielite_salience_vs_ches2019_immigrate_salience_vs_ches2019_enviro_salience_vs_ches2019_eu_position_vs_ches2019_lrgen"
+att1="ches2019_enviro_salience"
+att2="ches2019_eu_position"
+experiment="${att1}_vs_$att2"
+echo $experiment
 embeddings="$embeddings/$experiment"
 logdir="$logdir/$experiment"
 python viz_attitudinal.py --embeddings=$embeddings --logdir=$logdir --users_limit=$users_limit
